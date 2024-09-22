@@ -1,0 +1,93 @@
+<html>
+<head>
+    <title>Interactive Webpage</title>
+    <link rel="stylesheet" href="Lab4.css">
+</head>
+<body>
+    <h1 id="pageHeading">INST377 - Lab 4</h1>
+
+    <div class="container">
+        <div class="section">
+            <form id="alertForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required placeholder="Enter your name">
+                <button type="submit">Alert Me</button>
+            </form>
+        </div>
+
+        <div class="section">
+            <div class="center-button">
+                <button id="changeColorBtn">Change Color</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <form id="textForm">
+                <label for="textInput">Enter text:</label>
+                <input type="text" id="textInput" placeholder="Test for special characters">
+                <button type="submit">Validate Text</button>
+            </form>
+        </div>
+
+        <div class="section">
+            <div class="center-button">
+                <button id="addTextBtn">Add Text</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+           // Alert Me Section
+        function handleAlertForm(event) {
+            event.preventDefault();
+            var nameInput = document.getElementById('name');
+            var name = nameInput.value;
+            window.alert('Hi ' + name + '!');
+        }
+
+        var alertForm = document.getElementById('alertForm');
+        alertForm.addEventListener('submit', handleAlertForm);
+
+        // Change Color Section
+        var isBlue = true;
+        function changeBackgroundColor() {
+            if (isBlue) {
+                document.body.style.backgroundColor = '#2ecc71';
+            } else {
+                document.body.style.backgroundColor = '#3498db';
+            }
+            isBlue = !isBlue;
+        }
+
+        var changeColorBtn = document.getElementById('changeColorBtn');
+        changeColorBtn.addEventListener('click', changeBackgroundColor);
+
+        // Text Tester Section
+        function validateText(event) {
+            event.preventDefault();
+            var textInput = document.getElementById('textInput');
+            var text = textInput.value;
+            var specialChars = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+            var hasSpecialChars = specialChars.test(text);
+            
+            if (hasSpecialChars) {
+                window.alert('The text contains special characters!');
+            } else {
+                window.alert('The text is valid (no special characters).');
+            }
+        }
+
+        var textForm = document.getElementById('textForm');
+        textForm.addEventListener('submit', validateText);
+
+        // Add Text Section
+        function addTextToHeading() {
+            var pageHeading = document.getElementById('pageHeading');
+            pageHeading.textContent = pageHeading.textContent + ' Add Text';
+        }
+
+        var addTextBtn = document.getElementById('addTextBtn');
+        addTextBtn.addEventListener('click', addTextToHeading);
+    </script>
+</body>
+</html>
